@@ -489,15 +489,15 @@ $ hexo clean                <span class="token comment" spellcheck="true"># 清�
 $ hexo generate             <span class="token comment" spellcheck="true"># 生成静态文件</span>
 $ hexo server -p 4000       <span class="token comment" spellcheck="true"># 启动web服务,默认端口也是4000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>至此,服务器搭建完成了,每次更换主题后一定要通过<code>hexo clean</code>清除缓存,否侧很容易发生各种各样的bug<br>修改blog目录下的<code>_config.yml</code>文件,找到deploy配置修改如下</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># Deployment</span>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token comment" spellcheck="true"># Deployment</span>
 <span class="token comment" spellcheck="true">## Docs: https://hexo.io/docs/deployment.html</span>
-deploy:
-  type: <span class="token function">git</span>
-  repo: git@服务器IP地址:/home/git/blog.git
-  branch: master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> git@服务器IP地址<span class="token punctuation">:</span>/home/git/blog.git
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="部署到服务器上"><a href="#部署到服务器上" class="headerlink" title="部署到服务器上"></a>部署到服务器上</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save    <span class="token comment" spellcheck="true"># 安装部署所需的插件</span>
 hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy    <span class="token comment" spellcheck="true"># 部署到指定的deploy上</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h3><p><img src="./../../themes/hexo-theme-matery/source/medias/img/git_bushu.png" alt="img"></p>
+<p>当看到下面的例子时,远程就部署完成了<br><img src="/medias/featureimages/git_bushu.png" alt="img"></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -817,13 +817,13 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/10/mo-ban-ce-shi/">
+                <a href="/2020/03/10/mo-ban-ce-shi-er/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="模版测试">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="模版测试二">
                         
-                        <span class="card-title">模版测试</span>
+                        <span class="card-title">模版测试二</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
