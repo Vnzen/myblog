@@ -576,33 +576,33 @@
         <div class="card">
 
             
+            <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
 
-            
-            <link rel="stylesheet" href="/libs/gitment/gitment-default.css">
-<link rel="stylesheet" href="/css/gitment.css">
-
-<div class="gitment-card card" data-aos="fade-up">
+<div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="gitment-content" class="card-content"></div>
+    <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="/libs/gitment/gitment.js"></script>
+<script src="/libs/gitalk/gitalk.min.js"></script>
 <script>
-var gitment = new Gitment({
-    id: 'Tue Mar 10 2020 21:05:46 GMT+0800',
-    owner: 'vnzen',
-    repo: 'https://github.com/Vnzen/myblog',
-    oauth: {
-        client_id: '6d964df74214a49e93bb',
-        client_secret: '7465f2dfa3e6c08abfa8f579b0ec356419b2654e'
-    }
-});
+    let gitalk = new Gitalk({
+        clientID: '6d964df74214a49e93bb',
+        clientSecret: '7465f2dfa3e6c08abfa8f579b0ec356419b2654e',
+        repo: 'https://github.com/Vnzen/myblog',
+        owner: 'vnzen',
+        admin: "vnzen",
+        id: '2020-03-10T21-05-46',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
 
-gitment.render('gitment-content');
+    gitalk.render('gitalk-container');
 </script>
+            
+
             
 
             
