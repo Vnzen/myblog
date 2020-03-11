@@ -464,12 +464,12 @@ $ <span class="token function">chmod</span> 700 ~/.ssh<span aria-hidden="true" c
 $ <span class="token function">git</span> init --bare blog.git
 $ <span class="token keyword">echo</span> <span class="token string">"git --work-tree=/home/www/website --git-dir=/home/git/blog.git checkout -f"</span> <span class="token operator">>></span> ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>授予该文件可执行权限  </p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">chmod</span> +x ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">chmod</span> +x ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>回到root用户,创建<code>/home/www/website</code>,并赋予任何用户可读可写的权限</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">mkdir</span> /home/www <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> /home/www/website
 $ <span class="token function">chmod</span> -R o+r+w /home/www      <span class="token comment" spellcheck="true"># 给所有人读写</span>
 $ <span class="token function">chmod</span> -R o+x+w /home/www         <span class="token comment" spellcheck="true"># 给所有人增加执行和写权限</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>至此就完成了所有关于服务器端的配置</p>
+<p>一定要配置读写权限，不然git用户写不了文件，如果使用<code>chown -R git:git /home/www</code>,caddy用户读取不了<br>至此就完成了所有关于服务器端的配置</p>
 <h2 id="本地安装hexo"><a href="#本地安装hexo" class="headerlink" title="本地安装hexo"></a>本地安装hexo</h2><p>注意hexo需要git以及node</p>
 <h3 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装nvm</h3><p>nvm是node版本管理工具<br>为了解决node各种版本存在不兼容现象<br>nvm是让你在同一台机器上安装和切换不同版本的node的工具<br>Debian9默认源的node只有一个,不推荐使用系统安装的,推荐使用nvm版本管理器, <a href="https://github.com/nvm-sh/nvm.git" target="_blank" rel="noopener">一键安装nvm</a></p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh <span class="token operator">|</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -495,9 +495,10 @@ $ hexo server -p 4000       <span class="token comment" spellcheck="true"># 启�
   <span class="token key atrule">type</span><span class="token punctuation">:</span> git
   <span class="token key atrule">repo</span><span class="token punctuation">:</span> git@服务器IP地址<span class="token punctuation">:</span>/home/git/blog.git
   <span class="token key atrule">branch</span><span class="token punctuation">:</span> master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="部署到服务器上"><a href="#部署到服务器上" class="headerlink" title="部署到服务器上"></a>部署到服务器上</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save    <span class="token comment" spellcheck="true"># 安装部署所需的插件</span>
-hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy    <span class="token comment" spellcheck="true"># 部署到指定的deploy上</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>当看到下面的例子时,远程就部署完成了<br><img src="/medias/featureimages/git_bushu.png" alt="img"></p>
+<h3 id="部署到服务器上"><a href="#部署到服务器上" class="headerlink" title="部署到服务器上"></a>部署到服务器上</h3><pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save    <span class="token comment" spellcheck="true"># 安装部署所需的插件</span>
+$ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy    <span class="token comment" spellcheck="true"># 部署到指定的deploy上</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>当看到下面的例子时,远程就部署完成了<br><img src="/medias/featureimages/git_bushu.png" alt="部署成功，皆大欢喜"></p>
+<p>参考链接：<a href="https://blog.objectspace.cn/2019/08/15/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E5%B9%B6%E9%83%A8%E7%BD%B2%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6/" target="_blank" rel="noopener">从零搭建Hexo博客并部署阿里云服务器-奶妈级教学</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -742,10 +743,299 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy
     
 
     
+        <link rel="stylesheet" href="/libs/gitment/gitment-default.css">
+<link rel="stylesheet" href="/css/gitment.css">
+
+<div class="gitment-card card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitment-content" class="card-content"></div>
+</div>
+
+<script src="/libs/gitment/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+    id: 'Tue Mar 10 2020 23:23:42 GMT+0800',
+    owner: '1017888735@qq.com',
+    repo: 'https://github.com/Vnzen/myblog',
+    oauth: {
+        client_id: '6d964df74214a49e93bb',
+        client_secret: '7465f2dfa3e6c08abfa8f579b0ec356419b2654e'
+    }
+});
+
+gitment.render('gitment-content');
+</script>
+    
+
+    
 
     
 
     
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'o6h50mITWf3WU0fHsUzbMxQK-gzGzoHsz',
+        appKey: 'JC3T07wrcrg6wzexBlIWXcBk',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
 
     
 
@@ -829,7 +1119,7 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是我自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要
+                            这是hexo-theme-matery的README.MD,但是了一部分删除部分,当作我的模版吧,也可以参考一下,记一下markdown的用法
                         
                     </div>
                     <div class="publish-info">
@@ -1160,8 +1450,6 @@ $(function () {
 
     
 
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
