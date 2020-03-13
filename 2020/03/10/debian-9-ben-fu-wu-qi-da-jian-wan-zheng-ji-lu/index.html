@@ -448,30 +448,23 @@ $ systemctl disable caddy.service       <span class="token comment" spellcheck="
 $ <span class="token function">netstat</span> -tnlp <span class="token operator">|</span> <span class="token function">grep</span> :443             <span class="token comment" spellcheck="true"># 查看443端口占用情况</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="安装Git及配置仓库"><a href="#安装Git及配置仓库" class="headerlink" title="安装Git及配置仓库"></a>安装Git及配置仓库</h3><p>主要目的是让个人的电脑可以通过ssh方式将我们的博客部署到服务器上。操作如下：<br>安装git:</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ apt <span class="token function">install</span> <span class="token function">git</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>添加一个<code>git</code>用户,并设置<code>git</code>用户的密码</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ adduser <span class="token function">git</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>切换到git用户，然后在~目录下创建.ssh文件夹</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">su</span> <span class="token function">git</span>
-$ <span class="token function">cd</span> ~ <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> .ssh <span class="token operator">&amp;&amp;</span> <span class="token function">cd</span> .ssh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>生成公钥密钥文件,一直会车,不输任何信息</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ ssh-keygen<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>此时在目录下就会有两个文件，分别是<br><code>id_rsa</code>(私钥) 和 <code>id_rsa.pub</code>(公钥)  </p>
 <p>然后在<code>自己的电脑上</code>，使用ssh方式连接我们的云服务器</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ ssh-keygen
-$ <span class="token function">scp</span> ~/.ssh/id_rsa.pub git@服务器ip地址:~          <span class="token comment" spellcheck="true"># 将自己电脑的公钥复制服务器上</span>
-$ <span class="token function">ssh</span> git@服务器ip地址                              <span class="token comment" spellcheck="true"># 登录到服务器</span>
+$ <span class="token function">scp</span> ~/.ssh/id_rsa.pub root@服务器ip地址:~          <span class="token comment" spellcheck="true"># 将自己电脑的公钥复制服务器上</span>
+$ <span class="token function">ssh</span> root@服务器ip地址                              <span class="token comment" spellcheck="true"># 登录到服务器</span>
 $ <span class="token function">cat</span> ~/id_rsa.pub <span class="token operator">>></span> ~/.ssh/authorized_keys      <span class="token comment" spellcheck="true"># 这一步是让以后的每次部署都不需要在输入密码了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>成功后,我们直接通过git用户创建一个git的仓库，并且新建一个post-receive文件，操作如下:</p>
+<p>成功后,我们直接创建一个git的仓库，并且新建一个post-receive文件，操作如下:</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">cd</span> ~
 $ <span class="token function">git</span> init --bare blog.git
-$ <span class="token keyword">echo</span> <span class="token string">"git --work-tree=/home/www/website --git-dir=/home/git/blog.git checkout -f"</span> <span class="token operator">>></span> ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+$ <span class="token keyword">echo</span> <span class="token string">"git --work-tree=/root/website --git-dir=/root/blog.git checkout -f"</span> <span class="token operator">>></span> ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>前面的路径为部署路径 ，后面的路径为仓库的路径<br>post-receive会在收到push请求完成后执行 <a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="noopener">更多信息</a><br>授予该文件可执行权限  </p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">chmod</span> +x ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>回到root用户,创建<code>/home/www/website</code>,并赋予任何用户可读可写的权限</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">mkdir</span> /home/www <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> /home/www/website
-$ <span class="token function">chmod</span> -R o+r+w /home/www         <span class="token comment" spellcheck="true"># 给所有人读写</span>
-$ <span class="token function">chmod</span> -R o+x+w /home/www         <span class="token comment" spellcheck="true"># 给所有人增加执行和写权限</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>一定要配置读写权限，不然git用户写不了文件，如果使用<code>chown -R git:git /home/www</code>,caddy用户读取不了<br>至此就完成了所有关于服务器端的配置</p>
+<p>创建<code>/root/website</code></p>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">mkdir</span> /root/website<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>至此就完成了所有关于服务器端的配置</p>
 <h2 id="本地安装hexo"><a href="#本地安装hexo" class="headerlink" title="本地安装hexo"></a>本地安装hexo</h2><p>注意hexo需要git以及node</p>
 <h3 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装nvm</h3><p>nvm是node版本管理工具<br>为了解决node各种版本存在不兼容现象<br>nvm是让你在同一台机器上安装和切换不同版本的node的工具<br>Debian9默认源的node只有一个,不推荐使用系统安装的,推荐使用nvm版本管理器, <a href="https://github.com/nvm-sh/nvm.git" target="_blank" rel="noopener">一键安装nvm</a></p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh <span class="token operator">|</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -493,14 +486,14 @@ $ hexo server -p 4000       <span class="token comment" spellcheck="true"># 启�
 <p>至此,服务器搭建完成了,每次更换主题后一定要通过<code>hexo clean</code>清除缓存,否侧很容易发生各种各样的bug<br>修改blog目录下的<code>_config.yml</code>文件,找到deploy配置修改如下</p>
 <pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span>
   <span class="token key atrule">type</span><span class="token punctuation">:</span> git
-  <span class="token key atrule">repo</span><span class="token punctuation">:</span> git@服务器IP地址<span class="token punctuation">:</span>/home/git/blog.git
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> root@服务器IP地址<span class="token punctuation">:</span>/root/blog.git
   <span class="token key atrule">branch</span><span class="token punctuation">:</span> master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>也可以一次行部署到多个仓库,例如同时部署到<code>服务器</code>和<code>GitHub</code>:</p>
 <pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span>
   <span class="token key atrule">type</span><span class="token punctuation">:</span> git
   <span class="token key atrule">repo</span><span class="token punctuation">:</span> 
     <span class="token key atrule">github</span><span class="token punctuation">:</span> git@github.com<span class="token punctuation">:</span>Vnzen/vnzen.github.io.git
-    <span class="token key atrule">vnnznn</span><span class="token punctuation">:</span> git@服务器IP地址<span class="token punctuation">:</span>/home/git/blog.git
+    <span class="token key atrule">vnnznn</span><span class="token punctuation">:</span> root@服务器IP地址<span class="token punctuation">:</span>/root/blog.git
   <span class="token key atrule">branch</span><span class="token punctuation">:</span> master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>再给GitHub仓库添加<code>自己电脑</code>的公钥,就可以了:<code>Settings</code> -&gt; <code>Deploy keys</code> -&gt; <code>add deploy key</code></p>
 <h3 id="部署到服务器上"><a href="#部署到服务器上" class="headerlink" title="部署到服务器上"></a>部署到服务器上</h3><pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save    <span class="token comment" spellcheck="true"># 安装部署所需的插件</span>
