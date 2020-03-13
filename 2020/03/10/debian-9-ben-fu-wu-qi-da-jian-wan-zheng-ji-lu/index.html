@@ -426,7 +426,7 @@
     redir www.vnnznn.cn<span class="token punctuation">{</span>url<span class="token punctuation">}</span>        <span class="token comment" spellcheck="true"># 把vnnznn.cn重定向到www.vnnznn.cn</span>
 <span class="token punctuation">}</span>
 www.vnnznn.cn <span class="token punctuation">{</span>
-    root /home/www/website          <span class="token comment" spellcheck="true"># 服务器根目录</span>
+    root /root/website          <span class="token comment" spellcheck="true"># 服务器根目录</span>
     <span class="token function">gzip</span>                            <span class="token comment" spellcheck="true"># 如果浏览器支持,开启gzip压缩</span>
     timeouts none
     <span class="token comment" spellcheck="true"># proxy / 127.0.0.1:4000 {        # 把访问www.vnnznn.cn全部代理道本地4000端口</span>
@@ -499,7 +499,6 @@ $ hexo server -p 4000       <span class="token comment" spellcheck="true"># 启�
 <h3 id="部署到服务器上"><a href="#部署到服务器上" class="headerlink" title="部署到服务器上"></a>部署到服务器上</h3><pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save    <span class="token comment" spellcheck="true"># 安装部署所需的插件</span>
 $ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy    <span class="token comment" spellcheck="true"># 部署到指定的deploy上</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>当看到下面的例子时,远程就部署完成了<br><img src="/medias/featureimages/git_bushu.png" alt="部署成功，皆大欢喜"></p>
-<p>参考链接：<a href="https://blog.objectspace.cn/2019/08/15/%E4%BB%8E%E9%9B%B6%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%E5%B9%B6%E9%83%A8%E7%BD%B2%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6/" target="_blank" rel="noopener">从零搭建Hexo博客并部署阿里云服务器-奶妈级教学</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
