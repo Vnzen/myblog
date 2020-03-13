@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
     
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><link rel="alternate" href="/atom.xml" title="Vnzen" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Vnzen" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -417,12 +417,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="服务器安装caddy"><a href="#服务器安装caddy" class="headerlink" title="服务器安装caddy"></a>服务器安装caddy</h2><p>在 Debian9 中安装caddy,从下载页面下载<a href="https://dengxiaolong.com/caddy/doc/download.html" target="_blank" rel="noopener">caddy</a></p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">tar</span> -xzf caddy*.tar.gz caddy        <span class="token comment" spellcheck="true"># 对其解压缩获取到二进制文件（可执行文件）</span>
-$ <span class="token function">tar</span> -xzf caddy*.tar.gz ./init/linux-systemd/caddy.service
-$ <span class="token function">mv</span> ./caddy /usr/local/bin           <span class="token comment" spellcheck="true"># 把caddy的二进制文件移动到你可以轻易执行的位置</span>
-$ <span class="token function">mv</span> ./init/linux-systemd/caddy.service /lib/systemd/system/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>安装好后,在<code>/etc/caddy/</code>下会创建一个<code>Caddyfile</code> 文件,然后编辑它</p>
+                <h2 id="服务器安装caddy"><a href="#服务器安装caddy" class="headerlink" title="服务器安装caddy"></a>服务器安装caddy</h2><p>在 Debian9 中安装caddy,可以一键安装,也从下载页面下载<a href="https://dengxiaolong.com/caddy/doc/download.html" target="_blank" rel="noopener">caddy</a></p>
+<pre class="line-numbers language-bash"><code class="language-bash">$ curl https://getcaddy.com <span class="token operator">|</span> <span class="token function">bash</span> -s personalsystem/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>安装好后,在<code>/etc/caddy/</code>下创建一个<code>Caddyfile</code> 文件,然后编辑它</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ vim /etc/caddy/Caddyfile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>输入配置,参考<a href="https://dengxiaolong.com/caddy/zh/" target="_blank" rel="noopener">caddy中文帮助文档</a></p>
 <pre class="line-numbers language-bash"><code class="language-bash">vnnznn.cn <span class="token punctuation">{</span>
@@ -456,17 +453,13 @@ $ <span class="token function">netstat</span> -tnlp <span class="token operator"
 <p>切换到git用户，然后在~目录下创建.ssh文件夹</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">su</span> <span class="token function">git</span>
 $ <span class="token function">cd</span> ~ <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> .ssh <span class="token operator">&amp;&amp;</span> <span class="token function">cd</span> .ssh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>生成公钥密钥文件</p>
+<p>生成公钥密钥文件,一直会车,不输任何信息</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ ssh-keygen<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时在目录下就会有两个文件，分别是<br><code>id_rsa</code>(私钥) 和 <code>id_rsa.pub</code>(公钥)<br>复制一份公钥文件</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">cp</span> id_rsa.pub authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>这样目录下就会有一个authorized_keys文件，它和id_rsa.pub一模一样。<br>最后我们修改它的权限</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">chmod</span> 600 ~/.ssh/authorized_keys
-$ <span class="token function">chmod</span> 700 ~/.ssh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>此时在目录下就会有两个文件，分别是<br><code>id_rsa</code>(私钥) 和 <code>id_rsa.pub</code>(公钥)  </p>
 <p>然后在<code>自己的电脑上</code>，使用ssh方式连接我们的云服务器</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ ssh-keygen
-$ <span class="token function">scp</span> ~/.ssh/id_rsa.pub git@你的服务器ip:~          <span class="token comment" spellcheck="true"># 将自己电脑的公钥复制服务器上</span>
-$ <span class="token function">ssh</span> git@你的服务器ip                              <span class="token comment" spellcheck="true"># 登录到服务器</span>
+$ <span class="token function">scp</span> ~/.ssh/id_rsa.pub git@服务器ip地址:~          <span class="token comment" spellcheck="true"># 将自己电脑的公钥复制服务器上</span>
+$ <span class="token function">ssh</span> git@服务器ip地址                              <span class="token comment" spellcheck="true"># 登录到服务器</span>
 $ <span class="token function">cat</span> ~/id_rsa.pub <span class="token operator">>></span> ~/.ssh/authorized_keys      <span class="token comment" spellcheck="true"># 这一步是让以后的每次部署都不需要在输入密码了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>成功后,我们直接通过git用户创建一个git的仓库，并且新建一个post-receive文件，操作如下:</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">cd</span> ~
