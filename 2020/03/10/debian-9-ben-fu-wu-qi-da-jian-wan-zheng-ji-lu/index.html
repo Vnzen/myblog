@@ -455,11 +455,11 @@ $ <span class="token function">netstat</span> -tnlp <span class="token operator"
 <pre class="line-numbers language-bash"><code class="language-bash">$ ssh-keygen
 $ <span class="token function">scp</span> ~/.ssh/id_rsa.pub root@服务器ip地址:~          <span class="token comment" spellcheck="true"># 将自己电脑的公钥复制服务器上</span>
 $ <span class="token function">ssh</span> root@服务器ip地址                              <span class="token comment" spellcheck="true"># 登录到服务器</span>
-$ <span class="token function">cat</span> ~/id_rsa.pub <span class="token operator">>></span> ~/.ssh/authorized_keys      <span class="token comment" spellcheck="true"># 这一步是让以后的每次部署都不需要在输入密码了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+$ <span class="token function">cat</span> ~/id_rsa.pub <span class="token operator">&gt;&gt;</span> ~/.ssh/authorized_keys      <span class="token comment" spellcheck="true"># 这一步是让以后的每次部署都不需要在输入密码了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>成功后,我们直接创建一个git的仓库，并且新建一个post-receive文件，操作如下:</p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">cd</span> ~
 $ <span class="token function">git</span> init --bare blog.git
-$ <span class="token keyword">echo</span> <span class="token string">"git --work-tree=/root/website --git-dir=/root/blog.git checkout -f"</span> <span class="token operator">>></span> ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+$ <span class="token keyword">echo</span> <span class="token string">"git --work-tree=/root/website --git-dir=/root/blog.git checkout -f"</span> <span class="token operator">&gt;&gt;</span> ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>前面的路径为部署路径 ，后面的路径为仓库的路径<br>post-receive会在收到push请求完成后执行 <a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="noopener">更多信息</a><br>授予该文件可执行权限  </p>
 <pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">chmod</span> +x ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>创建<code>/root/website</code></p>
