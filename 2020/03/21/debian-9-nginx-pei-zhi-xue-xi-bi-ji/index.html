@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx 配置学习笔记, Vnzen">
+    <meta name="keywords" content="debian 9 - nginx 配置学习笔记, Vnzen">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>nginx 配置学习笔记 | Vnzen</title>
+    <title>debian 9 - nginx 配置学习笔记 | Vnzen</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -245,12 +245,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">nginx 配置学习笔记</h1>
+                    <h1 class="description center-align post-title">debian 9 - nginx 配置学习笔记</h1>
                 </div>
             </div>
         </div>
@@ -376,6 +376,15 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/other/" class="post-category">
+                                other
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -402,8 +411,56 @@
             <div id="articleContent">
                 <pre class="line-numbers language-bash"><code class="language-bash">$ apt update
 $ apt <span class="token function">install</span> nginx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><a href="https://letsencrypt.org/zh-cn/getting-started/" target="_blank" rel="noopener">https://letsencrypt.org/zh-cn/getting-started/</a></p>
-<p>配置·</p>
+<blockquote>
+<p>这样就安装好了nginx，但是<code>版本</code>不一定是你想要的<br>这时直接访问80端口就看到nginx欢迎页面了<br>默认的配置文件<code>/etc/nginx/sites-enabled/default</code><br><img src="/medias/featureimages/2020-03-21-3.46.05.png" alt="呐，这就完事了"></p>
+</blockquote>
+<p>配置nginx</p>
+<pre class="line-numbers language-bash"><code class="language-bash">$ vim /etc/nginx/sites-enabled/default      <span class="token comment" spellcheck="true"># 修改默认的配置或者删掉，则在/etc/nginx/cond</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>若是删掉，则在<code>/etc/nginx/conf.d/</code>下新增 <code>.conf</code>文件,内容大致如下</p>
+</blockquote>
+<pre class="line-numbers language-config"><code class="language-config">server {
+    listen 80;
+    server_name www.vnnznn.cn;
+    rewrite ^(.*) https://$server_name$1 permanent;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name www.vnnznn.cn;
+    charset utf-8;
+    ssl_protocols TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    ssl_ecdh_curve secp384r1;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+    ssl_session_tickets off;
+    ssl_certificate www.vnnznn.cn.crt;
+    ssl_certificate_key www.vnnznn.cn.key;
+
+    access_log  /var/log/nginx/www.vnnznn.cn.access.log;
+    error_log /var/log/nginx/www.vnnznn.cn.error.log;
+
+    root /usr/share/nginx;
+    location / {
+        index  index.html;
+    }
+
+    location /venn/zenn {
+      proxy_redirect off;
+      proxy_pass http://127.0.0.1:28935;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+</blockquote>
+<p>免费证书申请: <a href="https://letsencrypt.org/zh-cn/getting-started/" target="_blank" rel="noopener">let’s encrypt</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -447,7 +504,7 @@ $ apt <span class="token function">install</span> nginx<span aria-hidden="true" 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn/2020/03/21/nginx-pei-zhi-xue-xi-bi-ji/">http://www.vnnznn.cn/2020/03/21/nginx-pei-zhi-xue-xi-bi-ji/</a>
+                    <a href="http://www.vnnznn.cn/2020/03/21/debian-9-nginx-pei-zhi-xue-xi-bi-ji/">http://www.vnnznn.cn/2020/03/21/debian-9-nginx-pei-zhi-xue-xi-bi-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -920,13 +977,13 @@ $ apt <span class="token function">install</span> nginx<span aria-hidden="true" 
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/03/21/nginx-pei-zhi-xue-xi-bi-ji/">
+                <a href="/2020/03/21/debian-9-nginx-pei-zhi-xue-xi-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="nginx 配置学习笔记">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="debian 9 - nginx 配置学习笔记">
                         
-                        <span class="card-title">nginx 配置学习笔记</span>
+                        <span class="card-title">debian 9 - nginx 配置学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -934,10 +991,8 @@ $ apt <span class="token function">install</span> nginx<span aria-hidden="true" 
                         
                             $ apt update
 $ apt install nginx
-https://letsencrypt.org/zh-cn/getting-started/
-配置·
 
-        document.querySelectorAll('
+这样就安装好了nginx，但是版本不一定是你想要的这时直接访问80端口就看到nginx欢迎页面了默认的配置文件/etc/nginx/sites-enabled/defaul
                         
                     </div>
                     <div class="publish-info">
@@ -946,8 +1001,12 @@ https://letsencrypt.org/zh-cn/getting-started/
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Vnzen
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/other/" class="post-category">
+                                    other
+                                </a>
+                            
                             
                         </span>
                     </div>
