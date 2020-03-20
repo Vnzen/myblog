@@ -409,13 +409,13 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class="line-numbers language-bash"><code class="language-bash">$ apt update
+                <h2 id="debian-9-nginx-配置学习笔记"><a href="#debian-9-nginx-配置学习笔记" class="headerlink" title="debian 9 - nginx 配置学习笔记"></a>debian 9 - nginx 配置学习笔记</h2><pre class="line-numbers language-bash"><code class="language-bash">$ apt update
 $ apt <span class="token function">install</span> nginx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p>这样就安装好了nginx，但是<code>版本</code>不一定是你想要的<br>这时直接访问80端口就看到nginx欢迎页面了<br>默认的配置文件<code>/etc/nginx/sites-enabled/default</code><br><img src="/medias/featureimages/2020-03-21-3.46.05.png" alt="呐，这就完事了"></p>
 </blockquote>
 <p>配置nginx</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ vim /etc/nginx/sites-enabled/default      <span class="token comment" spellcheck="true"># 修改默认的配置或者删掉，则在/etc/nginx/cond</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ vim /etc/nginx/sites-enabled/default      <span class="token comment" spellcheck="true"># 修改默认的配置或者删掉</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>若是删掉，则在<code>/etc/nginx/conf.d/</code>下新增 <code>.conf</code>文件,内容大致如下</p>
 </blockquote>
@@ -459,8 +459,8 @@ server {
 }
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-</blockquote>
 <p>免费证书申请: <a href="https://letsencrypt.org/zh-cn/getting-started/" target="_blank" rel="noopener">let’s encrypt</a></p>
+</blockquote>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -989,10 +989,10 @@ server {
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            $ apt update
+                            debian 9 - nginx 配置学习笔记$ apt update
 $ apt install nginx
 
-这样就安装好了nginx，但是版本不一定是你想要的这时直接访问80端口就看到nginx欢迎页面了默认的配置文件/etc/nginx/sites-enabled/defaul
+这样就安装好了nginx，但是版本不一定是你想要的这时直接访问80端口就看到nginx欢迎页面了默认的配置文件/etc/ngi
                         
                     </div>
                     <div class="publish-info">
