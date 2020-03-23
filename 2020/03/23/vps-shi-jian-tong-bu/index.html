@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Debian 9 - caddy - hexo 博客搭建, Vnzen">
+    <meta name="keywords" content="vps 时间同步, Vnzen">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Debian 9 - caddy - hexo 博客搭建 | Vnzen</title>
+    <title>vps 时间同步 | Vnzen</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -245,12 +245,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Debian 9 - caddy - hexo 博客搭建</h1>
+                    <h1 class="description center-align post-title">vps 时间同步</h1>
                 </div>
             </div>
         </div>
@@ -365,21 +365,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Debian9/">
-                                <span class="chip bg-color">Debian9</span>
-                            </a>
-                        
-                            <a href="/tags/caddy/">
-                                <span class="chip bg-color">caddy</span>
-                            </a>
-                        
-                            <a href="/tags/hexo/">
-                                <span class="chip bg-color">hexo</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -400,7 +388,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-10
+                    2020-03-23
                 </div>
                 
 
@@ -417,91 +405,29 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="服务器安装caddy"><a href="#服务器安装caddy" class="headerlink" title="服务器安装caddy"></a>服务器安装caddy</h2><p>在 Debian9 中安装caddy,可以一键安装,也从下载页面下载<a href="https://dengxiaolong.com/caddy/doc/download.html" target="_blank" rel="noopener">caddy</a></p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ curl https://getcaddy.com <span class="token operator">|</span> <span class="token function">bash</span> -s personalsystem/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>安装好后,在<code>/etc/caddy/</code>下创建一个<code>Caddyfile</code> 文件,然后编辑它</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ vim /etc/caddy/Caddyfile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>输入配置,参考<a href="https://dengxiaolong.com/caddy/zh/" target="_blank" rel="noopener">caddy中文帮助文档</a></p>
-<pre class="line-numbers language-bash"><code class="language-bash">vnnznn.cn www.vnnznn.cn <span class="token punctuation">{</span>
-    root /root/website              <span class="token comment" spellcheck="true"># 服务器根目录</span>
-    <span class="token function">gzip</span>                            <span class="token comment" spellcheck="true"># 如果浏览器支持,开启gzip压缩</span>
-    timeouts none
-    <span class="token comment" spellcheck="true"># proxy / 127.0.0.1:4000 {</span>
-    <span class="token comment" spellcheck="true">#     without /venn</span>
-    <span class="token comment" spellcheck="true">#     websocket</span>
-    <span class="token comment" spellcheck="true"># }</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>配置完成后,启动caddy<br>caddy常用命令</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">sudo</span> systemctl daemon-reload
-$ <span class="token function">sudo</span> systemctl <span class="token function">enable</span> caddy
-$ <span class="token function">sudo</span> systemctl start caddy
-$ caddy -conf /etc/caddy/Caddyfile      <span class="token comment" spellcheck="true"># 启动并指定配置文件</span>
-
-$ systemctl start caddy.service         <span class="token comment" spellcheck="true"># 启动caddy</span>
-$ systemctl restart caddy.service       <span class="token comment" spellcheck="true"># 重启caddy</span>
-$ systemctl stop caddy.service          <span class="token comment" spellcheck="true"># 停止</span>
-$ systemctl <span class="token function">enable</span> caddy.service        <span class="token comment" spellcheck="true"># 开机自启</span>
-$ systemctl disable caddy.service       <span class="token comment" spellcheck="true"># 禁止开机自启</span>
-$ <span class="token function">netstat</span> -tnlp <span class="token operator">|</span> <span class="token function">grep</span> :443             <span class="token comment" spellcheck="true"># 查看443端口占用情况</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="安装Git及配置仓库"><a href="#安装Git及配置仓库" class="headerlink" title="安装Git及配置仓库"></a>安装Git及配置仓库</h3><p>主要目的是让个人的电脑可以通过ssh方式将我们的博客部署到服务器上。操作如下：<br>安装git:</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ apt <span class="token function">install</span> <span class="token function">git</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>生成公钥密钥文件,一直会车,不输任何信息</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ ssh-keygen<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>此时在目录下就会有两个文件，分别是<br><code>id_rsa</code>(私钥) 和 <code>id_rsa.pub</code>(公钥)  </p>
-<p>然后在<code>自己的电脑上</code>，使用ssh方式连接我们的云服务器</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ ssh-keygen
-$ <span class="token function">scp</span> ~/.ssh/id_rsa.pub root@服务器ip地址:~           <span class="token comment" spellcheck="true"># 将自己电脑的公钥复制服务器上</span>
-$ <span class="token function">ssh</span> root@服务器ip地址                               <span class="token comment" spellcheck="true"># 登录到服务器</span>
-$ <span class="token function">cat</span> ~/id_rsa.pub <span class="token operator">&gt;&gt;</span> ~/.ssh/authorized_keys        <span class="token comment" spellcheck="true"># 这一步是让以后的每次部署都不需要在输入密码了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>成功后,我们直接创建一个git的仓库，并且新建一个post-receive文件，操作如下:</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">cd</span> ~
-$ <span class="token function">git</span> init --bare blog.git
-$ <span class="token keyword">echo</span> <span class="token string">"git --work-tree=/root/website --git-dir=/root/blog.git checkout -f"</span> <span class="token operator">&gt;&gt;</span> ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>前面的路径为部署路径 ，后面的路径为仓库的路径<br>post-receive会在收到push请求完成后执行 <a href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90" target="_blank" rel="noopener">更多信息</a><br>授予该文件可执行权限  </p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">chmod</span> +x ~/blog.git/hooks/post-receive<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>创建<code>/root/website</code></p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">mkdir</span> /root/website<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>至此就完成了所有关于服务器端的配置</p>
+                <h3 id="vps-时间同步"><a href="#vps-时间同步" class="headerlink" title="vps 时间同步"></a><center>vps 时间同步</center></h3><p>有的奸商把<code>ntpdate</code>的端口屏蔽了，还故意改硬件的时间，导致每次重启时间都会错误，导致无法时间同步，但办法还是有的<br>利于跟<code>ntpdate</code>相似的的工具<code>rdate</code>来同步就好了</p>
+<pre class="line-numbers language-bash"><code class="language-bash">$ apt <span class="token function">install</span> rdate                             <span class="token comment" spellcheck="true"># 安装rdate</span>
+$ rdate time-b.timefreq.bldrdoc.gov             <span class="token comment" spellcheck="true"># 获取服务器时间</span>
+$ rdate -s time-b.timefreq.bldrdoc.gov          <span class="token comment" spellcheck="true"># 同步</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-<p>如果是root用户，难免出现一些不方便<br>所以新建一个用户来可能更方便一点<br>以新建一个git用户为例</p>
+<p>将其加入<code>/etc/rc.local</code>达到开启自动同步时间<br>果你的系统没有<code>rdate</code>, 如<code>Centos 8</code>那就得手动设置了</p>
 </blockquote>
-<pre class="line-numbers language-bash"><code class="language-bash">$ adduser <span class="token function">git</span>                     <span class="token comment" spellcheck="true"># 添加一个</span>
-$ <span class="token function">chmod</span> -R o+r+w /home/website    <span class="token comment" spellcheck="true"># 给读写权限</span>
-$ <span class="token function">chmod</span> -R o+x+w /home/website    <span class="token comment" spellcheck="true"># 给执行权限</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="本地安装hexo"><a href="#本地安装hexo" class="headerlink" title="本地安装hexo"></a>本地安装hexo</h2><p>注意hexo需要git以及node</p>
-<h3 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装nvm</h3><p>nvm是node版本管理工具<br>为了解决node各种版本存在不兼容现象<br>nvm是让你在同一台机器上安装和切换不同版本的node的工具<br>Debian9默认源的node只有一个,不推荐使用系统安装的,推荐使用nvm版本管理器, <a href="https://github.com/nvm-sh/nvm.git" target="_blank" rel="noopener">一键安装nvm</a></p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh <span class="token operator">|</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>或者</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">wget</span> -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh <span class="token operator">|</span> <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>安装完成后,需要<code>重启bash</code>才能生效,查看nvm版本</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ nvm --version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h3><p>安装nvm后开始安装node,安装node最新稳定版</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ nvm <span class="token function">install</span> stable<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>通过<code>nvm list</code> 列出已安装的版本</p>
-<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">可以参考hexo官网</a></p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
-$ hexo init blog            <span class="token comment" spellcheck="true"># 生成一个名为blog的博客目录</span>
-$ <span class="token function">cd</span> blog
-$ <span class="token function">npm</span> <span class="token function">install</span>               <span class="token comment" spellcheck="true"># 初始化博客目录</span>
-$ hexo clean                <span class="token comment" spellcheck="true"># 清除缓存</span>
-$ hexo generate             <span class="token comment" spellcheck="true"># 生成静态文件</span>
-$ hexo server -p 4000       <span class="token comment" spellcheck="true"># 启动web服务,默认端口也是4000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>至此,服务器搭建完成了,每次更换主题后一定要通过<code>hexo clean</code>清除缓存,否侧很容易发生各种各样的bug<br>修改blog目录下的<code>_config.yml</code>文件,找到deploy配置修改如下</p>
-<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span>
-  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
-  <span class="token key atrule">repo</span><span class="token punctuation">:</span> root@服务器IP地址<span class="token punctuation">:</span>/root/blog.git
-  <span class="token key atrule">branch</span><span class="token punctuation">:</span> master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>也可以一次行部署到多个仓库,例如同时部署到<code>服务器</code>和<code>GitHub</code>:</p>
-<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">deploy</span><span class="token punctuation">:</span>
-  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
-  <span class="token key atrule">repo</span><span class="token punctuation">:</span> 
-    <span class="token key atrule">github</span><span class="token punctuation">:</span> git@github.com<span class="token punctuation">:</span>Vnzen/vnzen.github.io.git
-    <span class="token key atrule">vnnznn</span><span class="token punctuation">:</span> root@服务器IP地址<span class="token punctuation">:</span>/root/blog.git
-  <span class="token key atrule">branch</span><span class="token punctuation">:</span> master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>再给GitHub仓库添加<code>自己电脑</code>的公钥,就可以了:<code>Settings</code> -&gt; <code>Deploy keys</code> -&gt; <code>add deploy key</code></p>
-<h3 id="部署到服务器上"><a href="#部署到服务器上" class="headerlink" title="部署到服务器上"></a>部署到服务器上</h3><pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save    <span class="token comment" spellcheck="true"># 安装部署所需的插件</span>
-$ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --deploy    <span class="token comment" spellcheck="true"># 部署到指定的deploy上</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>当看到下面的例子时,远程就部署完成了<br><img src="/medias/featureimages/git_bushu.png" alt="部署成功，皆大欢喜"></p>
+<blockquote>
+<p>下面是一些NTP时间服务器，看看哪一个你有用</p>
+</blockquote>
+<pre class="line-numbers language-yaml"><code class="language-yaml">cn.ntp.org.cn
+hk.ntp.org.cn
+tw.ntp.org.cn
+us.ntp.org.cn
+sgp.ntp.org.cn
+kr.ntp.org.cn
+jp.ntp.org.cn
+de.ntp.org.cn
+ina.ntp.org.cn
+time.nist.gov
+time<span class="token punctuation">-</span>b.nist.gov
+rdate.darkorb.net
+time<span class="token punctuation">-</span>b.timefreq.bldrdoc.gov<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -545,7 +471,7 @@ $ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --depl
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn/2020/03/10/debian-9-caddy-hexo-bo-ke-da-jian/">http://www.vnnznn.cn/2020/03/10/debian-9-caddy-hexo-bo-ke-da-jian/</a>
+                    <a href="http://www.vnnznn.cn/2020/03/23/vps-shi-jian-tong-bu/">http://www.vnnznn.cn/2020/03/23/vps-shi-jian-tong-bu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -582,19 +508,7 @@ $ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --depl
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Debian9/">
-                                    <span class="chip bg-color">Debian9</span>
-                                </a>
-                            
-                                <a href="/tags/caddy/">
-                                    <span class="chip bg-color">caddy</span>
-                                </a>
-                            
-                                <a href="/tags/hexo/">
-                                    <span class="chip bg-color">hexo</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1021,9 +935,52 @@ $ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --depl
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/23/vps-shi-jian-tong-bu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="vps 时间同步">
+                        
+                        <span class="card-title">vps 时间同步</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            vps 时间同步小技巧
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/other/" class="post-category">
+                                    other
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/03/21/debian-9-nginx-pei-zhi-xue-xi-bi-ji/">
                     <div class="card-image">
@@ -1041,9 +998,9 @@ $ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --depl
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1063,47 +1020,6 @@ $ hexo clean <span class="token operator">&amp;&amp;</span> hexo generate --depl
                         <span class="chip bg-color">nginx</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/10/mo-ban-ce-shi-er/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="模版测试二">
-                        
-                        <span class="card-title">模版测试二</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            这是hexo-theme-matery的README.MD,但是了一部分删除部分,当作我的模版吧,也可以参考一下,记一下markdown的用法
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/other/" class="post-category">
-                                    other
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
                 </div>
                 
             </div>
