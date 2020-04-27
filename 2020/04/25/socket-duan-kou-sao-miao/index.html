@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="vps 时间同步, Vnzen">
+    <meta name="keywords" content="socket/端口扫描, Vnzen">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>vps 时间同步 | Vnzen</title>
+    <title>socket/端口扫描 | Vnzen</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -245,12 +245,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/35.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">vps 时间同步</h1>
+                    <h1 class="description center-align post-title">socket/端口扫描</h1>
                 </div>
             </div>
         </div>
@@ -365,21 +365,16 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                    <div class="article-tag">
                         
-                            <a href="/categories/other/" class="post-category">
-                                other
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
                             </a>
                         
                     </div>
+                    
+                </div>
+                <div class="col s5 right-align">
                     
                 </div>
             </div>
@@ -388,7 +383,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-23
+                    2020-04-25
                 </div>
                 
 
@@ -405,29 +400,19 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="vps-时间同步"><a href="#vps-时间同步" class="headerlink" title="vps 时间同步"></a><center>vps 时间同步</center></h3><p>有的奸商把<code>ntpdate</code>的端口屏蔽了，还故意改硬件的时间，导致每次重启时间都会错误，导致无法时间同步，但办法还是有的<br>利于跟<code>ntpdate</code>相似的的工具<code>rdate</code>来同步就好了</p>
-<pre class="line-numbers language-bash"><code class="language-bash">$ apt <span class="token function">install</span> rdate                             <span class="token comment" spellcheck="true"># 安装rdate</span>
-$ rdate time-b.timefreq.bldrdoc.gov             <span class="token comment" spellcheck="true"># 获取服务器时间</span>
-$ rdate -s time-b.timefreq.bldrdoc.gov          <span class="token comment" spellcheck="true"># 同步</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>将其加入<code>/etc/rc.local</code>达到开启自动同步时间<br>果你的系统没有<code>rdate</code>, 如<code>Centos 8</code>那就得手动设置了</p>
-</blockquote>
-<blockquote>
-<p>下面是一些NTP时间服务器，看看哪一个你有用</p>
-</blockquote>
-<pre class="line-numbers language-yaml"><code class="language-yaml">cn.ntp.org.cn
-hk.ntp.org.cn
-tw.ntp.org.cn
-us.ntp.org.cn
-sgp.ntp.org.cn
-kr.ntp.org.cn
-jp.ntp.org.cn
-de.ntp.org.cn
-ina.ntp.org.cn
-time.nist.gov
-time<span class="token punctuation">-</span>b.nist.gov
-rdate.darkorb.net
-time<span class="token punctuation">-</span>b.timefreq.bldrdoc.gov<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <pre><code>原理:利用socket回话,只连接耳不收发任何信息</code></pre><pre class="line-numbers language-Python"><code class="language-Python">from socket import *
+
+def scan(host,port):
+    try:
+        soc = socket((host,port))
+        soc.connect()
+        print(f"the port {host} is open")
+
+if __name__ == '__main__':
+    host = input("enter a ipv4 address: ")
+    for port in range(2**16):
+        scan(host,port)
+    print("scan done")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -461,7 +446,7 @@ time<span class="token punctuation">-</span>b.timefreq.bldrdoc.gov<span aria-hid
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn" rel="external nofollow noreferrer">Vnzen</a>
+                    <a href="http://www.vnnznn.cn" rel="external nofollow noreferrer">Wenzen/Vnzen</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -471,7 +456,7 @@ time<span class="token punctuation">-</span>b.timefreq.bldrdoc.gov<span aria-hid
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn/2020/03/23/vps-shi-jian-tong-bu/">http://www.vnnznn.cn/2020/03/23/vps-shi-jian-tong-bu/</a>
+                    <a href="http://www.vnnznn.cn/2020/04/25/socket-duan-kou-sao-miao/">http://www.vnnznn.cn/2020/04/25/socket-duan-kou-sao-miao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -484,7 +469,7 @@ time<span class="token punctuation">-</span>b.timefreq.bldrdoc.gov<span aria-hid
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="http://www.vnnznn.cn" target="_blank">Vnzen</a>
+                    <a href="http://www.vnnznn.cn" target="_blank">Wenzen/Vnzen</a>
                     !
                 </span>
             </div>
@@ -508,7 +493,11 @@ time<span class="token punctuation">-</span>b.timefreq.bldrdoc.gov<span aria-hid
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -935,9 +924,61 @@ time<span class="token punctuation">-</span>b.timefreq.bldrdoc.gov<span aria-hid
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/04/25/socket-duan-kou-sao-miao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="socket/端口扫描">
+                        
+                        <span class="card-title">socket/端口扫描</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            原理:利用socket回话,只连接耳不收发任何信息from socket import *
+
+def scan(host,port):
+    try:
+        soc = socket((host,port))
+        s
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Wenzen/Vnzen
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/04/23/adobe-premiere-final-cut-pro-qu-chu-shi-pin-de-hei-bian/">
                     <div class="card-image">
@@ -958,9 +999,9 @@ Final Cut Pro1.建好资源库后,找出原视频的分辨率,如图所示为 12
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -978,55 +1019,6 @@ Final Cut Pro1.建好资源库后,找出原视频的分辨率,如图所示为 12
                     
                     <a href="/tags/Final-cut-pro/">
                         <span class="chip bg-color">Final cut pro</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/21/debian-9-nginx-pei-zhi-xue-xi-bi-ji/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/33.jpg" class="responsive-img" alt="debian 9 - nginx 配置学习笔记">
-                        
-                        <span class="card-title">debian 9 - nginx 配置学习笔记</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            记录一下Debian 9 nginx学习笔记
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/other/" class="post-category">
-                                    other
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/nginx/">
-                        <span class="chip bg-color">nginx</span>
                     </a>
                     
                 </div>
