@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="socket/端口扫描, Vnzen">
+    <meta name="keywords" content="1004 成绩排名 (20分), Vnzen">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>socket/端口扫描 | Vnzen</title>
+    <title>1004 成绩排名 (20分) | Vnzen</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -245,12 +245,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/45.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">socket/端口扫描</h1>
+                    <h1 class="description center-align post-title">1004 成绩排名 (20分)</h1>
                 </div>
             </div>
         </div>
@@ -367,8 +367,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/PAT-Basic-Level-Practice-%EF%BC%88%E4%B8%AD%E6%96%87%EF%BC%89/">
+                                <span class="chip bg-color">PAT (Basic Level) Practice （中文）</span>
                             </a>
                         
                     </div>
@@ -383,7 +383,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-25
+                    2020-07-11
                 </div>
                 
 
@@ -400,19 +400,35 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code>原理:利用socket回话,只连接耳不收发任何信息</code></pre><pre class="line-numbers language-Python"><code class="language-Python">from socket import *
-
-def scan(host,port):
-    try:
-        soc = socket((host,port))
-        soc.connect()
-        print(f"the port {host} is open")
-
-if __name__ == '__main__':
-    host = input("enter a ipv4 address: ")
-    for port in range(2**16):
-        scan(host,port)
-    print("scan done")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="1004-成绩排名-20分"><a href="#1004-成绩排名-20分" class="headerlink" title=" 1004 成绩排名 (20分)"></a><center> 1004 成绩排名 (20分)</center></h2><p>读入 n（&gt;0）名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。</p>
+<p>输入格式：<br>每个测试输入包含 1 个测试用例，格式为</p>
+<pre><code>第 1 行：正整数 n
+第 2 行：第 1 个学生的姓名 学号 成绩
+第 3 行：第 2 个学生的姓名 学号 成绩
+  ... ... ...
+第 n+1 行：第 n 个学生的姓名 学号 成绩</code></pre><p>其中<code>姓名</code>和<code>学号</code>均为不超过 10 个字符的字符串，成绩为 0 到 100 之间的一个整数，这里保证在一组测试用例中没有两个学生的成绩是相同的。</p>
+<p>输出格式：<br>对每个测试用例输出 2 行，第 1 行是成绩最高学生的姓名和学号，第 2 行是成绩最低学生的姓名和学号，字符串间有 1 空格。</p>
+<p>输入样例：</p>
+<pre><code>3
+Joe Math990112 89
+Mike CS991301 100
+Mary EE990830 95</code></pre><p>输出样例：</p>
+<pre><code>Mike CS991301
+Joe Math990112</code></pre><h2 id="我的代码"><a href="#我的代码" class="headerlink" title="我的代码:"></a>我的代码:</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 1004 </span>
+n <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+mm <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    m <span class="token operator">=</span> input<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span>
+    mm<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">[</span>m<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>m<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>int<span class="token punctuation">(</span>m<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+max <span class="token operator">=</span> mm<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+min <span class="token operator">=</span> mm<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> mm<span class="token punctuation">:</span>
+    <span class="token keyword">if</span> i<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">>=</span> max<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        max <span class="token operator">=</span> i
+    <span class="token keyword">if</span> i<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> min<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        min <span class="token operator">=</span> i
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{max[0]} {max[1]}"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"{min[0]} {min[1]}"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -446,7 +462,7 @@ if __name__ == '__main__':
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn" rel="external nofollow noreferrer">Wenzen/Vnzen</a>
+                    <a href="http://www.vnnznn.cn" rel="external nofollow noreferrer">Vnzen</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -456,7 +472,7 @@ if __name__ == '__main__':
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn/2020/04/25/socket-duan-kou-sao-miao/">http://www.vnnznn.cn/2020/04/25/socket-duan-kou-sao-miao/</a>
+                    <a href="http://www.vnnznn.cn/2020/07/11/1004-cheng-ji-pai-ming-20-fen/">http://www.vnnznn.cn/2020/07/11/1004-cheng-ji-pai-ming-20-fen/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -469,7 +485,7 @@ if __name__ == '__main__':
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="http://www.vnnznn.cn" target="_blank">Wenzen/Vnzen</a>
+                    <a href="http://www.vnnznn.cn" target="_blank">Vnzen</a>
                     !
                 </span>
             </div>
@@ -494,8 +510,8 @@ if __name__ == '__main__':
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/PAT-Basic-Level-Practice-%EF%BC%88%E4%B8%AD%E6%96%87%EF%BC%89/">
+                                    <span class="chip bg-color">PAT (Basic Level) Practice （中文）</span>
                                 </a>
                             
                         </div>
@@ -928,20 +944,19 @@ if __name__ == '__main__':
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/07/11/1001-hai-si-ren-bu-chang-ming-de-3n-1-cai-xiang-15-fen/">
+                <a href="/2020/07/11/1005-ji-xu-3n-1-cai-xiang-25-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/32.jpg" class="responsive-img" alt="1001 害死人不偿命的(3n+1)猜想 (15分)">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="1005 继续(3n+1)猜想 (25分)">
                         
-                        <span class="card-title">1001 害死人不偿命的(3n+1)猜想 (15分)</span>
+                        <span class="card-title">1005 继续(3n+1)猜想 (25分)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             1001 害死人不偿命的(3n+1)猜想 (15分) 卡拉兹(Callatz)猜想：
-对任何一个正整数 n，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把 (3n+1) 砍掉一半。这样一直反复砍下去，最后一定在某一步得到 n=1。卡
+                             卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对 n=3 进行验证的时候，我们需要计算 3、5、8、4、2、1
                         
                     </div>
                     <div class="publish-info">
@@ -974,32 +989,31 @@ if __name__ == '__main__':
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/23/adobe-premiere-final-cut-pro-qu-chu-shi-pin-de-hei-bian/">
+                <a href="/2020/07/11/1003-wo-yao-tong-guo-20-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/47.jpg" class="responsive-img" alt="Adobe Premiere/Final cut pro去除视频的黑边">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="1003 我要通过！ (20分)">
                         
-                        <span class="card-title">Adobe Premiere/Final cut pro去除视频的黑边</span>
+                        <span class="card-title">1003 我要通过！ (20分)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Adobe Premiere1.建好项目后直接导出  
-2.按图所示裁剪后,直接导出即可  
-Final Cut Pro1.建好资源库后,找出原视频的分辨率,如图所示为 1280x720
-2.随便建一个项目,按图所示,通过裁剪,找到需要裁剪
+                             1003 我要通过！ (20分)“答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。
+得到“答案正确”的条件是：
+字符
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
-                            Wenzen/Vnzen
+                            Vnzen
                             
                         </span>
                     </div>
@@ -1007,12 +1021,8 @@ Final Cut Pro1.建好资源库后,找出原视频的分辨率,如图所示为 12
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Adobe-Premiere/">
-                        <span class="chip bg-color">Adobe Premiere</span>
-                    </a>
-                    
-                    <a href="/tags/Final-cut-pro/">
-                        <span class="chip bg-color">Final cut pro</span>
+                    <a href="/tags/PAT-Basic-Level-Practice-%EF%BC%88%E4%B8%AD%E6%96%87%EF%BC%89/">
+                        <span class="chip bg-color">PAT (Basic Level) Practice （中文）</span>
                     </a>
                     
                 </div>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="socket/端口扫描, Vnzen">
+    <meta name="keywords" content="1001 害死人不偿命的(3n+1)猜想 (15分), Vnzen">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>socket/端口扫描 | Vnzen</title>
+    <title>1001 害死人不偿命的(3n+1)猜想 (15分) | Vnzen</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -245,12 +245,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/32.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">socket/端口扫描</h1>
+                    <h1 class="description center-align post-title">1001 害死人不偿命的(3n+1)猜想 (15分)</h1>
                 </div>
             </div>
         </div>
@@ -367,8 +367,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/PAT-Basic-Level-Practice-%EF%BC%88%E4%B8%AD%E6%96%87%EF%BC%89/">
+                                <span class="chip bg-color">PAT (Basic Level) Practice （中文）</span>
                             </a>
                         
                     </div>
@@ -383,7 +383,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-25
+                    2020-07-11
                 </div>
                 
 
@@ -400,19 +400,23 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code>原理:利用socket回话,只连接耳不收发任何信息</code></pre><pre class="line-numbers language-Python"><code class="language-Python">from socket import *
-
-def scan(host,port):
-    try:
-        soc = socket((host,port))
-        soc.connect()
-        print(f"the port {host} is open")
-
-if __name__ == '__main__':
-    host = input("enter a ipv4 address: ")
-    for port in range(2**16):
-        scan(host,port)
-    print("scan done")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="1001-害死人不偿命的-3n-1-猜想-15分"><a href="#1001-害死人不偿命的-3n-1-猜想-15分" class="headerlink" title=" 1001 害死人不偿命的(3n+1)猜想 (15分) "></a><center> 1001 害死人不偿命的(3n+1)猜想 (15分) </center></h2><p>卡拉兹(Callatz)猜想：</p>
+<p>对任何一个正整数 n，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把 (3n+1) 砍掉一半。这样一直反复砍下去，最后一定在某一步得到 n=1。卡拉兹在 1950 年的世界数学家大会上公布了这个猜想，传说当时耶鲁大学师生齐动员，拼命想证明这个貌似很傻很天真的命题，结果闹得学生们无心学业，一心只证 (3n+1)，以至于有人说这是一个阴谋，卡拉兹是在蓄意延缓美国数学界教学与科研的进展……</p>
+<p>我们今天的题目不是证明卡拉兹猜想，而是对给定的任一不超过 1000 的正整数 n，简单地数一下，需要多少步（砍几下）才能得到 n=1？</p>
+<p>输入格式：<br>每个测试输入包含 1 个测试用例，即给出正整数 n 的值。</p>
+<p>输出格式：<br>输出从 n 计算到 1 需要的步数。</p>
+<p>输入样例：  </p>
+<pre><code>3</code></pre><p>输出样例：  </p>
+<pre><code>5</code></pre><h2 id="我的代码："><a href="#我的代码：" class="headerlink" title="我的代码："></a>我的代码：</h2><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 1001</span>
+n <span class="token operator">=</span> int<span class="token punctuation">(</span>input<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+sum <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">while</span> n <span class="token operator">!=</span> <span class="token number">1</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> n<span class="token operator">%</span><span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">*</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> n<span class="token operator">/</span><span class="token number">2</span>
+    sum <span class="token operator">+=</span> <span class="token number">1</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -446,7 +450,7 @@ if __name__ == '__main__':
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn" rel="external nofollow noreferrer">Wenzen/Vnzen</a>
+                    <a href="http://www.vnnznn.cn" rel="external nofollow noreferrer">Vnzen</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -456,7 +460,7 @@ if __name__ == '__main__':
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.vnnznn.cn/2020/04/25/socket-duan-kou-sao-miao/">http://www.vnnznn.cn/2020/04/25/socket-duan-kou-sao-miao/</a>
+                    <a href="http://www.vnnznn.cn/2020/07/11/1001-hai-si-ren-bu-chang-ming-de-3n-1-cai-xiang-15-fen/">http://www.vnnznn.cn/2020/07/11/1001-hai-si-ren-bu-chang-ming-de-3n-1-cai-xiang-15-fen/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -469,7 +473,7 @@ if __name__ == '__main__':
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="http://www.vnnznn.cn" target="_blank">Wenzen/Vnzen</a>
+                    <a href="http://www.vnnznn.cn" target="_blank">Vnzen</a>
                     !
                 </span>
             </div>
@@ -494,8 +498,8 @@ if __name__ == '__main__':
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/PAT-Basic-Level-Practice-%EF%BC%88%E4%B8%AD%E6%96%87%EF%BC%89/">
+                                    <span class="chip bg-color">PAT (Basic Level) Practice （中文）</span>
                                 </a>
                             
                         </div>
@@ -928,20 +932,21 @@ if __name__ == '__main__':
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/07/11/1001-hai-si-ren-bu-chang-ming-de-3n-1-cai-xiang-15-fen/">
+                <a href="/2020/07/11/1002-xie-chu-zhe-ge-shu-20-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/32.jpg" class="responsive-img" alt="1001 害死人不偿命的(3n+1)猜想 (15分)">
+                        <img src="/medias/featureimages/35.jpg" class="responsive-img" alt="1002 写出这个数 (20分)">
                         
-                        <span class="card-title">1001 害死人不偿命的(3n+1)猜想 (15分)</span>
+                        <span class="card-title">1002 写出这个数 (20分)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             1001 害死人不偿命的(3n+1)猜想 (15分) 卡拉兹(Callatz)猜想：
-对任何一个正整数 n，如果它是偶数，那么把它砍掉一半；如果它是奇数，那么把 (3n+1) 砍掉一半。这样一直反复砍下去，最后一定在某一步得到 n=1。卡
+                             1002 写出这个数 (20分)读入一个正整数 n，计算其各位数字之和，用汉语拼音写出和的每一位数字。
+输入格式：每个测试输入包含 1 个测试用例，即给出自然数 n 的值。这里保证 n 小于 10​100​​ 。
+输出格式：在一行内输出 
                         
                     </div>
                     <div class="publish-info">
@@ -974,27 +979,29 @@ if __name__ == '__main__':
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/23/adobe-premiere-final-cut-pro-qu-chu-shi-pin-de-hei-bian/">
+                <a href="/2020/04/25/socket-duan-kou-sao-miao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/47.jpg" class="responsive-img" alt="Adobe Premiere/Final cut pro去除视频的黑边">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="socket/端口扫描">
                         
-                        <span class="card-title">Adobe Premiere/Final cut pro去除视频的黑边</span>
+                        <span class="card-title">socket/端口扫描</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Adobe Premiere1.建好项目后直接导出  
-2.按图所示裁剪后,直接导出即可  
-Final Cut Pro1.建好资源库后,找出原视频的分辨率,如图所示为 1280x720
-2.随便建一个项目,按图所示,通过裁剪,找到需要裁剪
+                            原理:利用socket回话,只连接耳不收发任何信息from socket import *
+
+def scan(host,port):
+    try:
+        soc = socket((host,port))
+        s
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-25
                             </span>
                         <span class="publish-author">
                             
@@ -1007,12 +1014,8 @@ Final Cut Pro1.建好资源库后,找出原视频的分辨率,如图所示为 12
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Adobe-Premiere/">
-                        <span class="chip bg-color">Adobe Premiere</span>
-                    </a>
-                    
-                    <a href="/tags/Final-cut-pro/">
-                        <span class="chip bg-color">Final cut pro</span>
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
                     </a>
                     
                 </div>
