@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Vnzen</title>
+  <title>anwenzen</title>
   
   <subtitle>记录美好学习生活</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>http://www.vnnznn.cn/</id>
   
   <author>
-    <name>Vnzen</name>
+    <name>anwenzen</name>
     
   </author>
   
